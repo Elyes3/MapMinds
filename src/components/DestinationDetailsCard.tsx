@@ -73,17 +73,17 @@ export default function DestinationDetailsCard({
     },
   };
   return (
-    <div
+    <motion.div
       className="h-full flex justify-center items-center"
-      style={{ width: '600px' }}
+      style={{ width: '80vw' }}
     >
       <div className="h-full flex overflow-hidden" style={{ width: '100%' }}>
         <div
           style={{
-            width: 100 * 6 + '%',
+            width: 80 * 6 + 'vw',
             display: 'flex',
             height: '100%',
-            transform: `translateX(${-(itemNumber * 600)}px)`,
+            transform: `translateX(${-(itemNumber * 80)}vw)`,
             alignItems: 'center',
             justifyContent: 'center',
           }}
@@ -91,23 +91,23 @@ export default function DestinationDetailsCard({
           {currentCriteria.map((criteria, id) => (
             <div
               key={id}
-              className="h-96 w-full rounded-xl flex justify-center items-center relative"
+              className="h-64 md:h-96 w-full rounded-xl flex justify-center items-center relative"
               style={{
                 backgroundImage: 'url("' + criteria + '")',
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
-                width: '600px',
+                width: '80vw',
                 backgroundPosition: 'center',
               }}
             >
               <div
-                className="w-11/12 md:w-10/12 lg:w-10/12 bg-white opacity-90 p-5 rounded-xl absolute"
-                style={{ bottom: '-4rem' }}
+                className="w-11/12 md:w-10/12 lg:w-10/12 bg-white opacity-90 p-5 rounded-xl absolute bottom"
+                data-bottom={criteriaInfo.choices?.length}
               >
                 <div>
                   <h3 className="text-center">{criteriaInfo.question}</h3>
                 </div>
-                <div className="flex gap-3 justify-center items-center mt-7">
+                <div className="flex md:flex-row flex-col gap-3 justify-center items-center mt-7">
                   {criteriaInfo.type === 'static' ? (
                     criteriaInfo.choices?.map((choice) => (
                       <Chips
@@ -121,8 +121,8 @@ export default function DestinationDetailsCard({
                     <div className="flex items-end gap-5">
                       <input
                         type="range"
-                        min="1000"
-                        defaultValue="2000"
+                        min="0"
+                        defaultValue="0"
                         max="30000"
                         className="input-range"
                         onChange={(event) =>
@@ -144,6 +144,13 @@ export default function DestinationDetailsCard({
                     <motion.button
                       initial="hidden"
                       animate="visible"
+                      onClick={() => {
+                        
+                        changeCriteriaResponse(
+                          'criteriaNumber',
+                          itemNumber + 1,
+                        );
+                      }}
                       variants={buttonAnimation}
                       transition={{
                         duration: 0.5,
@@ -208,12 +215,6 @@ export default function DestinationDetailsCard({
                         initial="hidden"
                         animate="visible"
                         variants={span}
-                        onClick={() => {
-                          changeCriteriaResponse(
-                            'criteriaNumber',
-                            itemNumber + 1,
-                          );
-                        }}
                         transition={{
                           delay: 2,
                           duration: 0.5,
@@ -229,6 +230,6 @@ export default function DestinationDetailsCard({
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
