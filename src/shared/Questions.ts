@@ -6,4 +6,5 @@ export type Question = {
   question: string;
   choices?: string[];
   type: 'static' | 'dynamic';
+  image : string
 };

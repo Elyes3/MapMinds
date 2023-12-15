@@ -27,7 +27,17 @@ function App() {
     selectedItem: '',
     budget: 2000,
   });
-
+  const allImages = (): string[] => {
+    const images: string[] = [];
+    Object.keys(data).map((criteria) => {
+      images.push(data[criteria].image);
+    });
+    return images;
+  };
+  const [cardAnimation, setCardAnimation] = useState<boolean>(false);
+  const changeCardAnimation = (value: boolean) => {
+    setCardAnimation(value);
+  };
   const changeCriteriaResponse = (
     key: keyof CriteriaResponse,
     value: string | number,
@@ -48,13 +58,16 @@ function App() {
         criteria={criteria}
         itemNumber={criteriaResponse.criteriaNumber}
       />
-      <div className="flex justify-center items-center h-full">
+      <div className="h-full justify-center items-center flex">
         <DestinationDetailsCard
           criteriaInfo={data[criteria[criteriaResponse.criteriaNumber].image]}
           changeCriteriaResponse={changeCriteriaResponse}
           budget={criteriaResponse.budget}
           selectedItem={criteriaResponse.selectedItem}
           itemNumber={criteriaResponse.criteriaNumber}
+          currentCriteria={allImages()}
+          cardAnimation={cardAnimation}
+          setCardAnimation={changeCardAnimation}
         ></DestinationDetailsCard>
       </div>
     </div>
