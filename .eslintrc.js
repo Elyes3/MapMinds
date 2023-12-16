@@ -32,5 +32,6 @@ module.exports = {
     'object-shorthand': 'off',
     'class-methods-use-this': 'off',
     'no-undef': 'off',
+    '@typescript-eslint/ban-ts-comment':'off'
   },
 };

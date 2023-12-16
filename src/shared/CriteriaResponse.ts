@@ -1,5 +1,8 @@
 export type CriteriaResponse = {
-  criteriaNumber: number;
-  selectedItem: string;
   budget: number;
+  weather: string;
+  food: string;
+  accommodation: string;
+  nature: string;
+  culture: string;
 };

@@ -11,7 +11,7 @@ type Props = {
 export default function ProgressItem({ criteria, id, itemNumber }: Props) {
   return (
     <div className="flex justify-center">
-      <div className="w-20 h-20 rounded-full flex flex-col justify-center items-center z-5 overflow-hidden bg-red-50 relative">
+      <div className="w-20 h-20 rounded-full flex flex-col justify-center items-center z-5 overflow-hidden bg-white relative">
         <FontAwesomeIcon
           className={
             'text-2xl z-10 ' +

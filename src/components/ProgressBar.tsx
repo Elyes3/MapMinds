@@ -23,12 +23,12 @@ export default function ProgressBar({ criteria, itemNumber }: Props) {
     },
   };
   return (
-    <div className="w-full relative">
+    <div className="w-full relative mt-16">
       <motion.div
         initial={{ width: '0%' }}
         animate={{ width: '83.66%' }}
         transition={{ duration: 0.3, delay: 2.5 }}
-        className="absolute h-3 z-0 flex items-center bg-red-50 top-8"
+        className="absolute h-3 z-0 flex items-center bg-white top-8"
         style={{ left: 100 / 12 + '%' }}
       >
         <motion.div

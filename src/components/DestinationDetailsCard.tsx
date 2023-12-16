@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Question } from '../shared/Questions';
 import Chips from './Chips';
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
+import { Dispatch, SetStateAction } from 'react';
 import { CriteriaResponse } from '../shared/CriteriaResponse';
 type Props = {
   changeCriteriaResponse: (
@@ -11,10 +12,11 @@ type Props = {
   criteriaInfo: Question;
   budget: number;
   selectedItem: string;
-  currentCriteria: string[];
   itemNumber: number;
-  cardAnimation: boolean;
-  setCardAnimation: (value: boolean) => void;
+  allCriteria: string[];
+  setBudget: (budget: number) => void;
+  setSelectedItem: Dispatch<SetStateAction<string>>;
+  setCriteriaNumber: Dispatch<SetStateAction<number>>;
 };
 export default function DestinationDetailsCard({
   changeCriteriaResponse,
@@ -22,8 +24,33 @@ export default function DestinationDetailsCard({
   budget,
   selectedItem,
   itemNumber,
-  currentCriteria,
+  allCriteria,
+  setSelectedItem,
+  setBudget,
 }: Props) {
+  useEffect(() => {
+    console.log('EFFECT');
+    parentControls.mount();
+    childControls.mount();
+  }, []);
+  const parentControls = useAnimation();
+  const childControls = useAnimation();
+  const handleAnimation = async () => {
+    await childControls.start({ y: -150 }, { duration: 0.5 });
+    await parentControls.start({ overflow: 'hidden' });
+    await childControls.start({ y: 300 }, { duration: 0.5 });
+
+    changeCriteriaResponse(
+      //@ts-ignore
+      allCriteria[itemNumber],
+      allCriteria[itemNumber] === 'budget'
+        ? parseInt(selectedItem)
+        : selectedItem,
+    );
+    await childControls.start({ y: -150 }, { duration: 0.5 });
+    await parentControls.start({ overflow: 'visible' });
+    await childControls.start({ y: 0 }, { duration: 0.5 });
+  };
   const icon = {
     hidden: {
       opacity: 0,
@@ -79,29 +106,35 @@ export default function DestinationDetailsCard({
     >
       <div className="h-full flex overflow-hidden" style={{ width: '100%' }}>
         <div
+          className="transition-1"
           style={{
             width: 80 * 6 + 'vw',
             display: 'flex',
             height: '100%',
+            transition: 'transform ease-out 0.3s',
             transform: `translateX(${-(itemNumber * 80)}vw)`,
             alignItems: 'center',
             justifyContent: 'center',
           }}
         >
-          {currentCriteria.map((criteria, id) => (
-            <div
+          {allCriteria.map((criteria, id) => (
+            <motion.div
               key={id}
-              className="h-64 md:h-96 w-full rounded-xl flex justify-center items-center relative"
+              animate={parentControls}
+              initial={{ overflow: 'visible' }}
+              className="h-64 md:h-96 w-full rounded-xl flex justify-center items-center relative shadow-lg"
               style={{
-                backgroundImage: 'url("' + criteria + '")',
+                backgroundImage: 'url("' + criteriaInfo.image + '")',
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
                 width: '80vw',
                 backgroundPosition: 'center',
               }}
             >
-              <div
-                className="w-11/12 md:w-10/12 lg:w-10/12 bg-white opacity-90 p-5 rounded-xl absolute bottom"
+              <motion.div
+                animate={childControls}
+                transition={{ duration: 1.5 }}
+                className="w-11/12 md:w-10/12 lg:w-10/12 bg-white shadow-2xl  opacity-90 p-5 rounded-xl absolute bottom"
                 data-bottom={criteriaInfo.choices?.length}
               >
                 <div>
@@ -114,7 +147,7 @@ export default function DestinationDetailsCard({
                         key={choice}
                         choice={choice}
                         selectedItem={selectedItem}
-                        changeCriteriaResponse={changeCriteriaResponse}
+                        setSelectedItem={setSelectedItem}
                       ></Chips>
                     ))
                   ) : (
@@ -125,12 +158,9 @@ export default function DestinationDetailsCard({
                         defaultValue="0"
                         max="30000"
                         className="input-range"
-                        onChange={(event) =>
-                          changeCriteriaResponse(
-                            'budget',
-                            parseInt(event.target.value),
-                          )
-                        }
+                        onChange={(event) => {
+                          setBudget(parseInt(event.target.value));
+                        }}
                       />
                       <span
                         className="font-bold text-blue-500"
@@ -144,12 +174,31 @@ export default function DestinationDetailsCard({
                     <motion.button
                       initial="hidden"
                       animate="visible"
-                      onClick={() => {
-                        
-                        changeCriteriaResponse(
-                          'criteriaNumber',
-                          itemNumber + 1,
-                        );
+                      onClick={async () => {
+                        if (itemNumber < 5) handleAnimation();
+                        //@ts-ignore
+                        else if (itemNumber == 5) {
+                          await childControls.start(
+                            { y: -150 },
+                            { duration: 0.5 },
+                          );
+                          await parentControls.start({
+                            overflow: 'hidden',
+                          });
+                          await childControls.start(
+                            { y: 300 },
+                            { duration: 0.5 },
+                          );
+                          await parentControls.start(
+                            { y: 250, opacity: 0 },
+                            { duration: 0.5 },
+                          );
+                          changeCriteriaResponse(
+                            //@ts-ignore
+                            allCriteria[itemNumber],
+                            selectedItem,
+                          );
+                        }
                       }}
                       variants={buttonAnimation}
                       transition={{
@@ -225,8 +274,8 @@ export default function DestinationDetailsCard({
                     </motion.button>
                   )}
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           ))}
         </div>
       </div>

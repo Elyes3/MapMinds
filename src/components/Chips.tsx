@@ -1,23 +1,20 @@
 import React from 'react';
 import { useState } from 'react';
-import { CriteriaResponse } from '../shared/CriteriaResponse';
+import { Dispatch, SetStateAction } from 'react';
 import { motion } from 'framer-motion';
 type Props = {
   choice: string;
-  changeCriteriaResponse: (
-    key: keyof CriteriaResponse,
-    value: string | number,
-  ) => void;
+  setSelectedItem: Dispatch<SetStateAction<string>>;
   selectedItem: string;
 };
 export default function Chips({
   choice,
-  changeCriteriaResponse,
+  setSelectedItem,
   selectedItem,
 }: Props) {
   const [isWavy, setIsWavy] = useState<boolean>(false);
   return (
-    <motion.div 
+    <motion.div
       onHoverStart={() => {
         setIsWavy(true);
       }}
@@ -41,8 +38,7 @@ export default function Chips({
         'p-2 relative border-2 rounded-full cursor-pointer overflow-hidden font-bold z-5 md:w-fit w-full border-[#0099ff] text-[#0099ff]'
       }
       onClick={() => {
-        if (selectedItem !== choice)
-          changeCriteriaResponse('selectedItem', choice);
+        if (selectedItem !== choice) setSelectedItem(choice);
       }}
     >
       <div className="z-10">{choice}</div>

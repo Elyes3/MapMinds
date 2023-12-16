@@ -23,3 +23,83 @@ div[data-bottom="0"]{
   bottom:-20%
 }
 }
+.transition-1 {
+  transition: translate;
+  transition-duration: 1;
+}
+
+.color-invert-hover:hover {
+  color: white;
+  background-color: #0099ff;
+  transition: 0.5s;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 300px;
+  background: rgb(248, 253, 255);
+  padding: 15px;
+  z-index: 50;
+
+}
+
+nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 300px;
+}
+
+.response-card {
+  cursor: pointer;
+  transition: color 0.5s ease;
+}
+
+.change-bg {
+  transition: 0.5s
+}
+
+.response-card:hover>.change-bg {
+  background-color: white;
+  color: #0099ff;
+}
+
+.response-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: -20;
+  width: 0%;
+  background-color: #0099ff;
+  transition: width 0.5s ease;
+}
+
+.response-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  z-index: -20;
+  width: 0%;
+  background-color: #0099ff;
+  transition: width 0.5s ease;
+}
+
+.response-card:hover::before {
+  width: 50%;
+}
+
+.response-card:hover::after {
+  width: 50%;
+}
+
+.response-card:hover {
+  color: white;
+}
