@@ -36,7 +36,7 @@ type Props = {
 };
 const Navigation = ({ userQuestionsAndResponse }: Props) => (
   <motion.div
-    className="flex justify-center flex-col gap-3 top-12 absolute p-3 w-full"
+    className="flex justify-center flex-col gap-3 mt-16 w-full"
     variants={variants}
   >
     <motion.h1 variants={childVariants} className="z-50 text-3xl text-center">

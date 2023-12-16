@@ -78,35 +78,37 @@ function App() {
     setCriteria(shuffledCriteria);
   }, []);
   return (
-    <div className="w-full h-full p-12 overflow-visible">
-      <Example userQuestionsAndResponse={userRes} />
-      <ProgressBar criteria={criteria} itemNumber={criteriaNumber} />
-      <div className="h-full justify-center items-center flex">
-        {criteriaNumber < 6 ? (
-          <DestinationDetailsCard
-            criteriaInfo={data[criteria[criteriaNumber].image]}
-            changeCriteriaResponse={changeCriteriaResponse}
-            budget={criteriaResponse.budget}
-            selectedItem={selectedItem}
-            setBudget={setBudget}
-            itemNumber={criteriaNumber}
-            setCriteriaNumber={setCriteriaNumber}
-            setSelectedItem={setSelectedItem}
-            allCriteria={allImages()}
-          ></DestinationDetailsCard>
-        ) : (
-          <div
-            style={{ width: '80vw' }}
-            className="shadow-2xl bg-white opacity-90 p-5 text-center rounded-full"
-          >
-            <p
-              className="text-6xl"
-              onClick={() => console.log(JSON.stringify(criteriaResponse))}
+    <div className="w-full h-full p-12">
+      <div className="w-full h-full overflow-visible">
+        <Example userQuestionsAndResponse={userRes} />
+        <ProgressBar criteria={criteria} itemNumber={criteriaNumber} />
+        <div className="h-full justify-center items-center flex">
+          {criteriaNumber < 6 ? (
+            <DestinationDetailsCard
+              criteriaInfo={data[criteria[criteriaNumber].image]}
+              changeCriteriaResponse={changeCriteriaResponse}
+              budget={criteriaResponse.budget}
+              selectedItem={selectedItem}
+              setBudget={setBudget}
+              itemNumber={criteriaNumber}
+              setCriteriaNumber={setCriteriaNumber}
+              setSelectedItem={setSelectedItem}
+              allCriteria={allImages()}
+            ></DestinationDetailsCard>
+          ) : (
+            <div
+              style={{ width: '80vw' }}
+              className="shadow-2xl bg-white opacity-90 p-5 text-center rounded-full"
             >
-              Your suggested destinations are :
-            </p>
-          </div>
-        )}
+              <p
+                className="text-6xl"
+                onClick={() => console.log(JSON.stringify(criteriaResponse))}
+              >
+                Your suggested destinations are :
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
