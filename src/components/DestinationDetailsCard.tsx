@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Question } from '../shared/Questions';
 import Chips from './Chips';
 import { motion, useAnimation } from 'framer-motion';
@@ -28,11 +28,6 @@ export default function DestinationDetailsCard({
   setSelectedItem,
   setBudget,
 }: Props) {
-  useEffect(() => {
-    console.log('EFFECT');
-    parentControls.mount();
-    childControls.mount();
-  }, []);
   const parentControls = useAnimation();
   const childControls = useAnimation();
   const handleAnimation = async () => {
@@ -124,7 +119,7 @@ export default function DestinationDetailsCard({
               initial={{ overflow: 'visible' }}
               className="h-64 md:h-96 w-full rounded-xl flex justify-center items-center relative shadow-lg"
               style={{
-                backgroundImage: 'url("' + criteriaInfo.image + '")',
+                backgroundImage: 'url("/images/' + criteria + '.png")',
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
                 width: '80vw',
