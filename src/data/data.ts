@@ -16,7 +16,7 @@ const data: Data = {
   food: {
     question:
       'What type of cuisine or culinary experience are you hoping to explore at your destination?',
-    choices: ['Arab Food', 'Sea Food', 'Tropical Fruits', 'Fast Food'],
+    choices: ['Arab Food', 'Sea Food', 'Tropical Fruits', 'Fast Food','Spicy'],
     type: 'static',
     image:'/images/food.png'
   },

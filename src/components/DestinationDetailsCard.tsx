@@ -163,144 +163,149 @@ export default function DestinationDetailsCard({
                   <div>
                     <h3 className="text-center">{criteriaInfo.question}</h3>
                   </div>
-                  <div className="flex md:flex-row flex-col gap-3 justify-center items-center mt-7">
-                    {criteriaInfo.type === 'static' ? (
-                      criteriaInfo.choices?.map((choice) => (
-                        <Chips
-                          key={choice}
-                          choice={choice}
-                          selectedItem={selectedItem}
-                          setSelectedItem={setSelectedItem}
-                        ></Chips>
-                      ))
-                    ) : (
-                      <div className="flex items-end gap-5">
-                        <input
-                          type="range"
-                          min="0"
-                          defaultValue="0"
-                          max="30000"
-                          className="input-range"
-                          onChange={(event) => {
-                            setBudget(parseInt(event.target.value));
-                          }}
-                        />
-                        <span
-                          className="font-bold text-blue-500"
-                          style={{ width: '5ch' }}
-                        >
-                          {budget}$
-                        </span>
-                      </div>
-                    )}
+                  <div className="flex flex-col">
+                    <div className="flex md:flex-row flex-col gap-3 justify-center items-center mt-7">
+                      {criteriaInfo.type === 'static' ? (
+                        criteriaInfo.choices?.map((choice) => (
+                          <Chips
+                            key={choice}
+                            choice={choice}
+                            selectedItem={selectedItem}
+                            setSelectedItem={setSelectedItem}
+                          ></Chips>
+                        ))
+                      ) : (
+                        <div className="flex items-end gap-5">
+                          <input
+                            type="range"
+                            min="0"
+                            defaultValue="0"
+                            max="30000"
+                            className="input-range"
+                            onChange={(event) => {
+                              setBudget(parseInt(event.target.value));
+                            }}
+                          />
+                          <span
+                            className="font-bold text-blue-500"
+                            style={{ width: '5ch' }}
+                          >
+                            {budget}$
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
                     {selectedItem && (
-                      <motion.button
-                        initial="hidden"
-                        animate="visible"
-                        onClick={async () => {
-                          if (itemNumber < 5) handleAnimation();
-                          //@ts-ignore
-                          else if (itemNumber == 5) {
-                            await childControls.start(
-                              { y: -150 },
-                              { duration: 0.5 },
-                            );
-                            await parentControls.start({
-                              overflow: 'hidden',
-                            });
-                            await childControls.start(
-                              { y: 300 },
-                              { duration: 0.5 },
-                            );
-                            await parentControls.start(
-                              { y: 250, opacity: 0 },
-                              { duration: 0.5 },
-                            );
-                            await parentControls.start(
-                              { display: 'none' },
-                              { duration: 0 },
-                            );
-                            changeCriteriaResponse(
-                              //@ts-ignore
-                              allCriteria[itemNumber],
-                              allCriteria[itemNumber] === 'budget'
-                                ? parseInt(selectedItem)
-                                : selectedItem,
-                            );
-                          }
-                        }}
-                        variants={buttonAnimation}
-                        transition={{
-                          duration: 0.5,
-                        }}
-                        className="flex gap-2 p-2 border rounded-xl"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="25px"
-                          height="25px"
-                          viewBox="0 0 258 258"
-                        >
-                          {/* Check mark  */}
-                          {/* Circle */}
-                          <motion.path
-                            d="M 130 6 C 198.483 6 254 61.517 254 130 C 254 198.483 198.483 254 130 254 C 61.517 254 6 198.483 6 130 C 6 61.517 61.517 6 130 6 Z"
-                            fill="transparent"
-                            strokeWidth="8"
-                            stroke="#35b38a"
-                            variants={iconCircle}
-                            initial="hidden"
-                            animate="visible"
-                            transition={{
-                              default: {
-                                delay: 1,
-                                duration: 0.5,
-                                ease: 'easeInOut',
-                              },
-                              fill: {
-                                delay: 1,
-                                duration: 0.5,
-                                ease: [1, 0, 0.8, 1],
-                              },
-                            }}
-                          />
-                          *
-                          <motion.path
-                            transform="translate(60 85)"
-                            d="M3 50L45 92L134 3"
-                            fill="transparent"
-                            variants={icon}
-                            initial="hidden"
-                            animate="visible"
-                            transition={{
-                              default: {
-                                delay: 1,
-                                duration: 0.8,
-                                ease: 'easeInOut',
-                              },
-                              fill: {
-                                delay: 1,
-                                duration: 0.8,
-                                ease: [1, 0, 0.8, 1],
-                              },
-                            }}
-                            stroke="#35b38a"
-                            strokeWidth={8}
-                          />
-                        </svg>
-                        <motion.span
-                          className="text-[#35b38a] font-bold"
+                      <div className="flex justify-center mt-5">
+                        <motion.button
                           initial="hidden"
                           animate="visible"
-                          variants={span}
+                          onClick={async () => {
+                            if (itemNumber < 5) handleAnimation();
+                            //@ts-ignore
+                            else if (itemNumber == 5) {
+                              await childControls.start(
+                                { y: -150 },
+                                { duration: 0.5 },
+                              );
+                              await parentControls.start({
+                                overflow: 'hidden',
+                              });
+                              await childControls.start(
+                                { y: 300 },
+                                { duration: 0.5 },
+                              );
+                              await parentControls.start(
+                                { y: 250, opacity: 0 },
+                                { duration: 0.5 },
+                              );
+                              await parentControls.start(
+                                { display: 'none' },
+                                { duration: 0 },
+                              );
+                              changeCriteriaResponse(
+                                //@ts-ignore
+                                allCriteria[itemNumber],
+                                allCriteria[itemNumber] === 'budget'
+                                  ? parseInt(selectedItem)
+                                  : selectedItem,
+                              );
+                            }
+                          }}
+                          variants={buttonAnimation}
                           transition={{
-                            delay: 2,
                             duration: 0.5,
                           }}
+                          className="flex gap-2 p-2 border rounded-xl"
                         >
-                          Next
-                        </motion.span>
-                      </motion.button>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="25px"
+                            height="25px"
+                            viewBox="0 0 258 258"
+                          >
+                            {/* Check mark  */}
+                            {/* Circle */}
+                            <motion.path
+                              d="M 130 6 C 198.483 6 254 61.517 254 130 C 254 198.483 198.483 254 130 254 C 61.517 254 6 198.483 6 130 C 6 61.517 61.517 6 130 6 Z"
+                              fill="transparent"
+                              strokeWidth="8"
+                              stroke="#35b38a"
+                              variants={iconCircle}
+                              initial="hidden"
+                              animate="visible"
+                              transition={{
+                                default: {
+                                  delay: 1,
+                                  duration: 0.5,
+                                  ease: 'easeInOut',
+                                },
+                                fill: {
+                                  delay: 1,
+                                  duration: 0.5,
+                                  ease: [1, 0, 0.8, 1],
+                                },
+                              }}
+                            />
+                            *
+                            <motion.path
+                              transform="translate(60 85)"
+                              d="M3 50L45 92L134 3"
+                              fill="transparent"
+                              variants={icon}
+                              initial="hidden"
+                              animate="visible"
+                              transition={{
+                                default: {
+                                  delay: 1,
+                                  duration: 0.8,
+                                  ease: 'easeInOut',
+                                },
+                                fill: {
+                                  delay: 1,
+                                  duration: 0.8,
+                                  ease: [1, 0, 0.8, 1],
+                                },
+                              }}
+                              stroke="#35b38a"
+                              strokeWidth={8}
+                            />
+                          </svg>
+                          <motion.span
+                            className="text-[#35b38a] font-bold"
+                            initial="hidden"
+                            animate="visible"
+                            variants={span}
+                            transition={{
+                              delay: 2,
+                              duration: 0.5,
+                            }}
+                          >
+                            Next
+                          </motion.span>
+                        </motion.button>
+                      </div>
                     )}
                   </div>
                 </motion.div>

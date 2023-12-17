@@ -121,7 +121,7 @@ function App() {
             className="shadow-2xl bg-white opacity-90 p-5 text-center rounded-3xl"
           >
             <p
-              className="text-2xl md:text-5xl"
+              className="text-2xl lg:text-4xl"
               onClick={() => console.log(JSON.stringify(criteriaResponse))}
             >
               Your suggested destinations are :
@@ -146,7 +146,9 @@ function App() {
                 </svg>
               </div>
             ) : countries.length === 0 ? (
-              <p className="text-md mt-16 text-2xl">No destinations found !</p>
+              <p className="text-md mt-16 lg:text-xl">
+                No destinations found !
+              </p>
             ) : (
               <div
                 className={
@@ -177,11 +179,12 @@ function App() {
                       />
                     </motion.div>
                     <motion.div
-                      className="mt-2"
+                      className="mt-2 overflow-visible"
                       transition={{ staggerChildren: 0.3 }}
                     >
                       {country.pays.split('').map((letter, id) => (
                         <motion.span
+                          className=" overflow-visible"
                           key={id}
                           initial={{ y: 20, opacity: 0 }}
                           animate={{ y: 0, opacity: 1 }}
