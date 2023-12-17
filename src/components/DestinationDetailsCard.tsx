@@ -216,10 +216,16 @@ export default function DestinationDetailsCard({
                               { y: 250, opacity: 0 },
                               { duration: 0.5 },
                             );
+                            await parentControls.start(
+                              { display: 'none' },
+                              { duration: 0 },
+                            );
                             changeCriteriaResponse(
                               //@ts-ignore
                               allCriteria[itemNumber],
-                              selectedItem,
+                              allCriteria[itemNumber] === 'budget'
+                                ? parseInt(selectedItem)
+                                : selectedItem,
                             );
                           }
                         }}

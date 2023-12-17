@@ -10,7 +10,10 @@
   bottom:-20%
 }
 @media only screen and (max-width: 768px) {
-  div[data-bottom="4"] {
+div[data-bottom="5"] {
+    bottom: -75%
+  }
+div[data-bottom="4"] {
     bottom:-80%
 }
   div[data-bottom="3"]{

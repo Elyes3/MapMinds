@@ -9,7 +9,7 @@ const data: Data = {
   },
   nature: {
     question: 'What natural surroundings do you desire in your destination?',
-    choices: ['Tropical', 'Beaches', 'Mountains', 'Islands'],
+    choices: ['Tropical', 'Beaches', 'Mountains', 'Islands','Desert'],
     type: 'static',
     image: '/images/nature.png'
   },
