@@ -176,8 +176,29 @@ function App() {
                         )}/flat/64.png`}
                       />
                     </motion.div>
-                    <motion.div transition={{ staggerChildren: 0.3 }}>
+                    <motion.div
+                      className="mt-2"
+                      transition={{ staggerChildren: 0.3 }}
+                    >
                       {country.pays.split('').map((letter, id) => (
+                        <motion.span
+                          key={id}
+                          initial={{ y: 20, opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          transition={{
+                            delay: 0.15 * (id + 1),
+                            duration: 0.3,
+                          }}
+                        >
+                          {letter}
+                        </motion.span>
+                      ))}
+                    </motion.div>
+                    <motion.div
+                      className="mt-2"
+                      transition={{ staggerChildren: 0.3 }}
+                    >
+                      {country.gouvernorat.split('').map((letter, id) => (
                         <motion.span
                           key={id}
                           initial={{ y: 20, opacity: 0 }}
