@@ -36,7 +36,7 @@ function App() {
   const [selectedItem, setSelectedItem] = useState<string>('');
   const [criteriaNumber, setCriteriaNumber] = useState<number>(0);
   const [criteriaResponse, setCriteriaResponse] = useState<CriteriaResponse>({
-    budget: 0,
+    budget: 500,
     weather: '',
     nature: '',
     food: '',
