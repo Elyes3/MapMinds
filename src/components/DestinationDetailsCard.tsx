@@ -178,9 +178,9 @@ export default function DestinationDetailsCard({
                         <div className="flex items-end gap-5">
                           <input
                             type="range"
-                            min="0"
+                            min="500"
                             defaultValue="0"
-                            max="30000"
+                            max="15000"
                             className="input-range"
                             onChange={(event) => {
                               setBudget(parseInt(event.target.value));

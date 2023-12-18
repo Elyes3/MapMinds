@@ -153,9 +153,7 @@ function App() {
               <div
                 className={
                   'mt-16 grid grid-cols-1 md:grid-cols-' +
-                  (countries.length === 1 ? '1 ' : '2 ') +
-                  'grid-rows-' +
-                  Math.round(countries.length / 2)
+                  (countries.length === 1 ? '1 ' : '2 ')
                 }
               >
                 {countries.map((country, id) => (

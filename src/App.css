@@ -48,6 +48,12 @@ div[data-bottom="0"]{
   z-index: 50;
 
 }
+@media (min-width:768px) {
+  .md:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
 
 nav {
   position: absolute;
