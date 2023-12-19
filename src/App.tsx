@@ -52,13 +52,11 @@ function App() {
   };
   const [countries, setCountries] = useState<Country[] | null>(null);
   const fetchCountries = async (body: CriteriaResponse) => {
-    console.log(JSON.stringify(criteriaResponse));
     const response = await axios({
       method: 'post',
       url: 'https://mapminds.onrender.com/',
       data: body,
     });
-    console.log(response.data);
     setCountries(response.data);
     return response.data;
   };
@@ -72,8 +70,6 @@ function App() {
     key: keyof CriteriaResponse,
     value: string | number,
   ) => {
-    console.log(key);
-    console.log(value);
     const userResponses = [
       ...userRes,
       {
@@ -88,7 +84,6 @@ function App() {
       ...criteriaResponse,
       [key]: value,
     };
-    console.log(updatedCriteriaInfo);
     setCriteriaResponse(updatedCriteriaInfo);
     if (criteriaNumber == 5) {
       fetchCountries(updatedCriteriaInfo);
@@ -120,10 +115,7 @@ function App() {
             style={{ width: '80vw' }}
             className="shadow-2xl bg-white opacity-90 p-5 text-center rounded-3xl"
           >
-            <p
-              className="text-2xl lg:text-4xl"
-              onClick={() => console.log(JSON.stringify(criteriaResponse))}
-            >
+            <p className="text-2xl lg:text-4xl">
               Your suggested destinations are :
             </p>
             {countries === null ? (

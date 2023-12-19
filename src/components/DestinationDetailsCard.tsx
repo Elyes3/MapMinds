@@ -141,7 +141,6 @@ export default function DestinationDetailsCard({
               key={id}
               animate={parentControls}
               initial={{ overflow: 'visible' }}
-              onLoad={() => console.log('LOADED')}
               className="h-64 md:h-96 w-full rounded-xl flex justify-center items-center relative shadow-lg"
               style={{
                 backgroundImage: imageLoaded
